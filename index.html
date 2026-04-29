@@ -314,7 +314,7 @@
     line-height: 1.6;
   }
 
-  .paper:hover .paper-abstract {
+  .paper-abstract.open {
     max-height: 600px;
     opacity: 1;
     margin-top: 12px;
@@ -506,7 +506,7 @@
 
 
   .abstract-btn {
-    display: none;
+    display: inline-block;
     clear: both;
     font-family: 'Inter', sans-serif;
     font-size: 0.68rem;
@@ -525,6 +525,22 @@
   .abstract-btn:hover {
     color: var(--text-muted);
     border-color: var(--text-dim);
+  }
+
+  .journal-link {
+    display: inline-block;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.62rem;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: var(--text-dimmer);
+    margin-left: 10px;
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .journal-link:hover {
+    color: var(--status-green);
   }
 
   .mobile-footer {
@@ -573,13 +589,6 @@
   body.mobile-preview .headshot { width: 120px; height: 120px; }
   body.mobile-preview .sidebar-links { justify-content: center; }
   body.mobile-preview .main { padding: 32px 20px; }
-
-  /* Mobile: abstracts always visible */
-  body.mobile-preview .paper-abstract {
-    max-height: none;
-    opacity: 1;
-    margin-top: 8px;
-  }
 
   /* Mobile: carousel is swipeable, no auto-scroll */
   body.mobile-preview .carousel-track {
@@ -707,34 +716,34 @@
       <div class="paper">
         <a class="paper-title" href="papers/BP_IneQuality.pdf" target="_blank">IneQuality</a>
         <div class="paper-meta">with Alessandra Peter &middot; March 2026</div>
-        <button class="abstract-btn" onclick="this.nextElementSibling.classList.toggle('open'); this.textContent = this.nextElementSibling.classList.contains('open') ? '− Summary' : '+ Summary'">+ Summary</button>
+        <button class="abstract-btn" onclick="const a = this.parentElement.querySelector('.paper-abstract'); a.classList.toggle('open'); this.textContent = a.classList.contains('open') ? '− Summary' : '+ Summary'">+ Summary</button>
         <div class="paper-abstract">Market power does more than raise prices: it distorts what firms choose to produce. Firms with market power deliberately degrade the quality of their low-end products to protect high-end sales. This disproportionately harms low-income households, while high-income households may benefit through general equilibrium forces.</div>
       </div>
       <div class="paper">
         <a class="paper-title" href="papers/Bornstein_Entry_Aging.pdf" target="_blank">Entry and Profits in an Aging Economy: The Role of Consumer Inertia</a>
         <div class="paper-meta">March 2026</div>
         <div class="paper-status">Accepted &mdash; Review of Economic Studies</div>
-        <button class="abstract-btn" onclick="this.nextElementSibling.classList.toggle('open'); this.textContent = this.nextElementSibling.classList.contains('open') ? '− Summary' : '+ Summary'">+ Summary</button>
+        <button class="abstract-btn" onclick="const a = this.parentElement.querySelector('.paper-abstract'); a.classList.toggle('open'); this.textContent = a.classList.contains('open') ? '− Summary' : '+ Summary'">+ Summary</button>
         <div class="paper-abstract">Using micro data, I show that older consumers are more reluctant to switch brands. As the population ages, incumbents enjoy a more captive customer base, raising markups and discouraging entry. This demand-side channel accounts for 20&ndash;30% of the decline in U.S. business formation and rise in profits over the past four decades.</div>
       </div>
       <div class="paper">
         <a class="paper-title" href="papers/Monopsony_Monetary_Policy.pdf" target="_blank">Monopsony Power and the Transmission of Monetary Policy</a>
         <div class="paper-meta">with Bence Bard&oacute;czy and Sergio Salgado &middot; November 2025</div>
-        <button class="abstract-btn" onclick="this.nextElementSibling.classList.toggle('open'); this.textContent = this.nextElementSibling.classList.contains('open') ? '− Summary' : '+ Summary'">+ Summary</button>
+        <button class="abstract-btn" onclick="const a = this.parentElement.querySelector('.paper-abstract'); a.classList.toggle('open'); this.textContent = a.classList.contains('open') ? '− Summary' : '+ Summary'">+ Summary</button>
         <div class="paper-abstract">Using administrative Census data, we show that firms with high labor market power respond less to monetary policy shocks. We build a New Keynesian model with oligopsonistic competition and show that the decline in labor market concentration since the 1980s has amplified the output response to monetary policy by about 50 percent.</div>
       </div>
       <div class="paper">
         <a class="paper-title" href="papers/Social_Insurance_Household_Debt.pdf" target="_blank">The Impact of Social Insurance on Household Debt</a>
         <div class="paper-meta">with Sasha Indarte &middot; November 2025</div>
         <div class="paper-status">R&amp;R &mdash; Review of Economic Studies</div>
-        <button class="abstract-btn" onclick="this.nextElementSibling.classList.toggle('open'); this.textContent = this.nextElementSibling.classList.contains('open') ? '− Summary' : '+ Summary'">+ Summary</button>
+        <button class="abstract-btn" onclick="const a = this.parentElement.querySelector('.paper-abstract'); a.classList.toggle('open'); this.textContent = a.classList.contains('open') ? '− Summary' : '+ Summary'">+ Summary</button>
         <div class="paper-abstract">Using credit bureau data on 10 million borrowers and the staggered expansion of Medicaid, we show that expanded eligibility increases borrowing. The main driver is credit supply: lenders extend more credit to households who become more financially resilient. The credit-supply channel accounts for about a third of the welfare gains from expanding Medicaid.</div>
       </div>
       <div class="paper">
         <a class="paper-title" href="papers/Trade_Credit.pdf" target="_blank">The Macroeconomics of Trade Credit</a>
         <div class="paper-meta">with Luigi Bocola &middot; August 2024</div>
         <div class="paper-status">R&amp;R &mdash; American Economic Review</div>
-        <button class="abstract-btn" onclick="this.nextElementSibling.classList.toggle('open'); this.textContent = this.nextElementSibling.classList.contains('open') ? '− Summary' : '+ Summary'">+ Summary</button>
+        <button class="abstract-btn" onclick="const a = this.parentElement.querySelector('.paper-abstract'); a.classList.toggle('open'); this.textContent = a.classList.contains('open') ? '− Summary' : '+ Summary'">+ Summary</button>
         <div class="paper-abstract">We develop a micro-founded model of trade credit in which supplier-to-firm financing creates a credit multiplier along production chains. Using Italian data, we find trade credit substantially amplified the output costs of the Great Recession.</div>
       </div>
     </section>
@@ -744,35 +753,40 @@
       <div class="paper">
         <a class="paper-title" href="papers/NLP_BornsteinPeter.pdf" target="_blank">Nonlinear Pricing and Misallocation</a>
         <div class="paper-meta">with Alessandra Peter</div>
-        <a class="paper-status published" href="https://doi.org/10.1257/aer.20230168" target="_blank">American Economic Review &middot; November 2025</a>
-        <button class="abstract-btn" onclick="this.nextElementSibling.classList.toggle('open'); this.textContent = this.nextElementSibling.classList.contains('open') ? '− Summary' : '+ Summary'">+ Summary</button>
+        <div class="paper-status published">American Economic Review &middot; November 2025</div>
+        <button class="abstract-btn" onclick="const a = this.parentElement.querySelector('.paper-abstract'); a.classList.toggle('open'); this.textContent = a.classList.contains('open') ? '− Summary' : '+ Summary'">+ Summary</button>
+        <a class="journal-link" href="https://doi.org/10.1257/aer.20230168" target="_blank">Journal Link</a>
         <div class="paper-abstract">Macroeconomic models typically assume firms set a single unit price. We show that allowing for the quantity-dependent pricing schedules prevalent in the data overturns standard results: markup dispersion across firms is no longer a sign of misallocation. Instead, the key distortion is across consumers within each firm, and the implied welfare losses are five times larger.</div>
       </div>
       <div class="paper">
         <a class="paper-title" href="papers/BKR_Oil_Market.pdf" target="_blank">A World Equilibrium Model of the Oil Market</a>
         <div class="paper-meta">with Per Krusell and Sergio Rebelo</div>
-        <a class="paper-status published" href="https://doi.org/10.1093/restud/rdac011" target="_blank">Review of Economic Studies &middot; January 2023</a>
-        <button class="abstract-btn" onclick="this.nextElementSibling.classList.toggle('open'); this.textContent = this.nextElementSibling.classList.contains('open') ? '− Summary' : '+ Summary'">+ Summary</button>
+        <div class="paper-status published">Review of Economic Studies &middot; January 2023</div>
+        <button class="abstract-btn" onclick="const a = this.parentElement.querySelector('.paper-abstract'); a.classList.toggle('open'); this.textContent = a.classList.contains('open') ? '− Summary' : '+ Summary'">+ Summary</button>
+        <a class="journal-link" href="https://doi.org/10.1093/restud/rdac019" target="_blank">Journal Link</a>
         <div class="paper-abstract">We use micro data on the universe of oil fields worldwide to build and estimate a structural model of the oil industry embedded in a general equilibrium model. Fracking firms can adjust production more quickly and at lower cost than conventional producers, weakening OPEC's market power and leading to large long-run declines in the level and volatility of oil prices.</div>
       </div>
       <div class="paper">
         <a class="paper-title" href="papers/CTSD.pdf" target="_blank">A Continuous-Time Model of Sovereign Debt</a>
-        <a class="paper-status published" href="https://doi.org/10.1016/j.jedc.2020.103963" target="_blank">Journal of Economic Dynamics and Control &middot; September 2020</a>
-        <button class="abstract-btn" onclick="this.nextElementSibling.classList.toggle('open'); this.textContent = this.nextElementSibling.classList.contains('open') ? '− Summary' : '+ Summary'">+ Summary</button>
+        <div class="paper-status published">Journal of Economic Dynamics and Control &middot; September 2020</div>
+        <button class="abstract-btn" onclick="const a = this.parentElement.querySelector('.paper-abstract'); a.classList.toggle('open'); this.textContent = a.classList.contains('open') ? '− Summary' : '+ Summary'">+ Summary</button>
+        <a class="journal-link" href="https://doi.org/10.1016/j.jedc.2020.103963" target="_blank">Journal Link</a>
         <div class="paper-abstract">A continuous-time formulation of sovereign default that is faster to solve than discrete-time models and generates more realistic spread volatility through a deleveraging channel.</div>
       </div>
       <div class="paper">
         <a class="paper-title" href="papers/BBD_European_Debt.pdf" target="_blank">Quantitative Sovereign Default Models and the European Debt Crisis</a>
         <div class="paper-meta">with Luigi Bocola and Alessandro Dovis</div>
-        <a class="paper-status published" href="https://doi.org/10.1016/j.jinteco.2019.01.011" target="_blank">Journal of International Economics &middot; May 2019</a>
-        <button class="abstract-btn" onclick="this.nextElementSibling.classList.toggle('open'); this.textContent = this.nextElementSibling.classList.contains('open') ? '− Summary' : '+ Summary'">+ Summary</button>
+        <div class="paper-status published">Journal of International Economics &middot; May 2019</div>
+        <button class="abstract-btn" onclick="const a = this.parentElement.querySelector('.paper-abstract'); a.classList.toggle('open'); this.textContent = a.classList.contains('open') ? '− Summary' : '+ Summary'">+ Summary</button>
+        <a class="journal-link" href="https://doi.org/10.1016/j.jinteco.2019.01.011" target="_blank">Journal Link</a>
         <div class="paper-abstract">Standard sovereign default models are calibrated to external debt, which works well for emerging markets but poorly for the European debt crisis. We show that for European economies, total public debt is the relevant state variable for default incentives, and that calibrating to it dramatically improves the model's fit to interest rate spreads.</div>
       </div>
       <div class="paper">
         <a class="paper-title" href="papers/Moral_Hazard_Greenspan_Put.pdf" target="_blank">Moral Hazard Misconceptions: The Case of the Greenspan Put</a>
         <div class="paper-meta">with Guido Lorenzoni</div>
-        <a class="paper-status published" href="https://doi.org/10.1057/s41308-018-0052-4" target="_blank">IMF Economic Review &middot; June 2018</a>
-        <button class="abstract-btn" onclick="this.nextElementSibling.classList.toggle('open'); this.textContent = this.nextElementSibling.classList.contains('open') ? '− Summary' : '+ Summary'">+ Summary</button>
+        <div class="paper-status published">IMF Economic Review &middot; June 2018</div>
+        <button class="abstract-btn" onclick="const a = this.parentElement.querySelector('.paper-abstract'); a.classList.toggle('open'); this.textContent = a.classList.contains('open') ? '− Summary' : '+ Summary'">+ Summary</button>
+        <a class="journal-link" href="https://doi.org/10.1057/s41308-018-0052-x" target="_blank">Journal Link</a>
         <div class="paper-abstract">Ex-post monetary easing after crises need not create moral hazard. When the central bank stabilizes asset prices optimally, the aggregate demand externality that distorts ex-ante borrowing can disappear.</div>
       </div>
     </section>
