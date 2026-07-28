@@ -212,9 +212,14 @@ q.addEventListener('input', ()=>{
 });
 
 const tt=document.getElementById('tt');
-function setTheme(light){ document.body.classList.toggle('light',light); tt.innerHTML=light?'&#9728;':'&#9790;';
-  try{ localStorage.setItem('si-theme',light?'light':'dark'); }catch(e){} }
-try{ const p=localStorage.getItem('si-theme'); if(p==='dark') setTheme(false); }catch(e){}
+function applyTheme(light){ document.body.classList.toggle('light',light); tt.innerHTML=light?'&#9728;':'&#9790;'; }
+function setTheme(light){ applyTheme(light); try{ localStorage.setItem('si-theme',light?'light':'dark'); }catch(e){} }
+try{
+  const urlTheme=new URLSearchParams(location.search).get('theme');
+  if(urlTheme==='dark') applyTheme(false);        // e.g. linked from homepage with ?theme=dark
+  else if(urlTheme==='light') applyTheme(true);
+  else { const p=localStorage.getItem('si-theme'); if(p==='dark') applyTheme(false); }
+}catch(e){}
 tt.addEventListener('click', ()=> setTheme(!document.body.classList.contains('light')));
 </script>
 </body>
