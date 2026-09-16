@@ -852,21 +852,21 @@
   const track = document.querySelector('.carousel-track');
   let startX, scrollStart, dragging = false;
 
-  track.addEventListener('touchstart', (e) => {
+  if (track) track.addEventListener('touchstart', (e) => {
     dragging = true;
     startX = e.touches[0].clientX;
     track.style.animationPlayState = 'paused';
     scrollStart = getTranslateX(track);
   });
 
-  track.addEventListener('touchmove', (e) => {
+  if (track) track.addEventListener('touchmove', (e) => {
     if (!dragging) return;
     const dx = e.touches[0].clientX - startX;
     track.style.animation = 'none';
     track.style.transform = `translateX(${scrollStart + dx}px)`;
   });
 
-  track.addEventListener('touchend', () => {
+  if (track) track.addEventListener('touchend', () => {
     dragging = false;
     // Resume animation from current position
     const current = getTranslateX(track);
