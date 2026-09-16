@@ -692,7 +692,13 @@
   }
 </style>
 </head>
-<body class="light">
+<body>
+<script>
+  // Default to the visitor's OS light/dark preference; the toggle overrides it for the session.
+  try {
+    if (!window.matchMedia('(prefers-color-scheme: dark)').matches) document.body.classList.add('light');
+  } catch (e) { document.body.classList.add('light'); }
+</script>
 <div class="layout">
   <aside class="sidebar">
     <div>
@@ -886,6 +892,8 @@
     const btn = document.getElementById('themeToggle');
     btn.innerHTML = document.body.classList.contains('light') ? '&#9728;' : '&#9790;';
   }
+  // Match the toggle icon to the resolved (OS-based) theme on load
+  document.getElementById('themeToggle').innerHTML = document.body.classList.contains('light') ? '&#9728;' : '&#9790;';
 </script>
 </body>
 </html>
