@@ -93,29 +93,31 @@
     min-height: 100vh;
   }
 
-  /* Sticky sidebar */
+  /* Sidebar: pinned on screens tall enough to show all of it; on shorter
+     windows it scrolls with the page (never its own scrollbar). */
   .sidebar {
-    position: sticky;
-    top: 0;
-    height: 100vh;
-    padding: 56px 36px;
+    position: relative;
+    padding: 44px 36px 32px;
     border-right: 1px solid var(--border);
     background: var(--bg-sidebar);
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    overflow-y: auto;
     transition: background 0.3s, border-color 0.3s;
   }
 
+  @media (min-width: 769px) and (min-height: 780px) {
+    .sidebar { position: sticky; top: 0; height: 100vh; }
+  }
+
   .headshot {
-    width: 180px;
-    height: 180px;
+    width: 150px;
+    height: 150px;
     border-radius: 50%;
     object-fit: cover;
     object-position: top;
     border: 2px solid var(--border-light);
-    margin-bottom: 24px;
+    margin-bottom: 20px;
   }
 
   .sidebar h1 {
@@ -136,17 +138,17 @@
   .sidebar .bio {
     font-size: 0.82rem;
     color: var(--text-dimmer);
-    margin-top: 20px;
+    margin-top: 16px;
     line-height: 1.6;
   }
 
   .sidebar nav {
-    margin-top: 36px;
+    margin-top: 26px;
   }
 
   .sidebar nav a {
     display: block;
-    padding: 9px 0;
+    padding: 7px 0;
     font-size: 0.78rem;
     color: var(--sidebar-nav);
     text-transform: uppercase;
@@ -166,7 +168,7 @@
   }
 
   .sidebar-links {
-    margin-top: 28px;
+    margin-top: 22px;
     display: flex;
     gap: 16px;
   }
