@@ -259,10 +259,8 @@
 
 <script>
 (function () {
-  // Paste the Google Apps Script web app URL here. Empty means preview mode: nothing is saved.
-  var API_URL = '';
-  // Shown only in preview mode. Once connected, the server decides which times appear.
-  var PREVIEW_TIMES = ['9:00 AM', '9:30 AM', '10:00 AM', '10:30 AM', '11:00 AM', '11:30 AM'];
+  // Google Apps Script web app. It returns only the times still available.
+  var API_URL = 'https://script.google.com/macros/s/AKfycbwDDC3RgYgXoFXKWkJJLzG0BPsEXLBOYVpUhuspS50E3228XztPSR-FfZvLSk59vcY-/exec';
 
   var ZOOM_URL = 'https://upenn.zoom.us/my/profsashaindarte';
   var CONTACT = 'gideonbo@wharton.upenn.edu';
@@ -410,12 +408,6 @@
   }
 
   function refresh() {
-    if (!API_URL) {
-      setOpen(PREVIEW_TIMES);
-      showNotice('Preview: this page is not connected yet, so bookings are not being saved.');
-      render();
-      return;
-    }
     fetch(API_URL, { method: 'GET', cache: 'no-store' })
       .then(function (r) { return r.json(); })
       .then(function (data) {
@@ -446,7 +438,6 @@
   function book(slot, name, email, errorEl, submit) {
     if (!name) return fail(errorEl, submit, slot.label, 'Please enter your name.');
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return fail(errorEl, submit, slot.label, 'Please enter a valid email address.');
-    if (!API_URL) return fail(errorEl, submit, slot.label, 'Preview: this page is not connected yet, so nothing was saved.');
 
     errorEl.hidden = true;
     submit.disabled = true;
@@ -547,19 +538,17 @@
   if (saved && parseTime(saved.slot)) {
     showDone(saved);
     // If the organizers reopened this time in the sheet, return to the list.
-    if (API_URL) {
-      fetch(API_URL, { method: 'GET', cache: 'no-store' })
-        .then(function (r) { return r.json(); })
-        .then(function (data) {
-          if (data.ok && data.open.indexOf(saved.slot) >= 0) {
-            try { localStorage.removeItem(STORE_KEY); } catch (e) {}
-            document.getElementById('done').hidden = true;
-            document.getElementById('choose').hidden = false;
-            start();
-          }
-        })
-        .catch(function () {});
-    }
+    fetch(API_URL, { method: 'GET', cache: 'no-store' })
+      .then(function (r) { return r.json(); })
+      .then(function (data) {
+        if (data.ok && data.open.indexOf(saved.slot) >= 0) {
+          try { localStorage.removeItem(STORE_KEY); } catch (e) {}
+          document.getElementById('done').hidden = true;
+          document.getElementById('choose').hidden = false;
+          start();
+        }
+      })
+      .catch(function () {});
   } else {
     start();
   }
