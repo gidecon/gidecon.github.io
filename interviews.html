@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Interview Sign-Up, November 4</title>
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Barlow:wght@500;600&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
+<style>
+  /* Layout: a Wharton-blue calendar leaf pinned on the left; the morning's six slots as a day rail on the right. */
+  :root {
+    --hero: #00305f;
+    --hero-glow: #004785;
+    --hero-ink: #ffffff;
+    --hero-soft: #b9cfe6;
+    --hero-line: rgba(255, 255, 255, 0.2);
+    --red: #a90533;
+    --ground: #f2f5f9;
+    --surface: #ffffff;
+    --ink: #0e1c2f;
+    --muted: #55647a;
+    --line: #d3dbe6;
+    --accent: #004785;
+    --accent-ink: #ffffff;
+    --alert: #a90533;
+    --display: 'Barlow Condensed', 'Arial Narrow', 'Helvetica Neue', Arial, sans-serif;
+    --ui: 'Barlow', 'Helvetica Neue', Arial, sans-serif;
+    --serif: 'Source Serif 4', Georgia, 'Times New Roman', serif;
+    color-scheme: light;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --hero: #00213f;
+      --hero-glow: #003a6e;
+      --ground: #08131f;
+      --surface: #0f1f31;
+      --ink: #e9eff7;
+      --muted: #9fb0c4;
+      --line: #24384f;
+      --accent: #7db8ef;
+      --accent-ink: #06192b;
+      --alert: #ff8aa0;
+      color-scheme: dark;
+    }
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--ground); color: var(--ink); font-family: var(--serif); font-size: 1.0625rem; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+  a { color: inherit; }
+  :focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+  [hidden] { display: none !important; }
+
+  .page { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); min-height: 100vh; }
+
+  /* The calendar leaf */
+  .leaf {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+    justify-content: space-between;
+    padding: 3rem clamp(1.5rem, 4vw, 4rem);
+    color: var(--hero-ink);
+    background: radial-gradient(120% 90% at 10% 0%, var(--hero-glow), var(--hero) 70%);
+    border-top: 8px solid var(--red);
+    overflow: hidden;
+  }
+  .brand { display: flex; flex-direction: column; gap: 0.1rem; }
+  .brand strong { font-family: var(--display); font-size: 1.6rem; font-weight: 600; letter-spacing: 0.01em; line-height: 1.1; }
+  .brand span { font-family: var(--ui); font-size: 0.72rem; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--hero-soft); }
+
+  .date { display: grid; grid-template-columns: auto minmax(0, 1fr); align-items: end; column-gap: 1.1rem; }
+  .date .eyebrow { grid-column: 1 / -1; font-family: var(--ui); font-size: 0.78rem; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: var(--hero-soft); margin-bottom: 0.25rem; }
+  .date .num { font-family: var(--display); font-weight: 700; font-size: clamp(9rem, 19vw, 17rem); line-height: 0.82; letter-spacing: -0.02em; font-variant-numeric: lining-nums; }
+  .date .words { font-family: var(--display); font-weight: 600; font-size: clamp(1.9rem, 3.4vw, 3rem); line-height: 1.02; padding-bottom: 0.45rem; }
+  .date .words span { display: block; }
+  .date .words .day { color: var(--hero-soft); font-weight: 500; }
+
+  .facts { list-style: none; border-top: 1px solid var(--hero-line); }
+  .facts li { display: grid; grid-template-columns: 5.2rem minmax(0, 1fr); gap: 1rem; padding: 0.7rem 0; border-bottom: 1px solid var(--hero-line); font-size: 1rem; line-height: 1.4; }
+  .facts b { font-family: var(--ui); font-size: 0.72rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--hero-soft); padding-top: 0.2rem; }
+
+  /* The schedule */
+  .content { padding: clamp(2rem, 5vw, 4.5rem) clamp(1.25rem, 5vw, 5rem); display: flex; flex-direction: column; gap: 2.5rem; min-width: 0; }
+  .inner { width: 100%; max-width: 40rem; display: flex; flex-direction: column; gap: 2.5rem; }
+
+  h1, h2 { font-family: var(--display); font-weight: 700; line-height: 1.02; text-wrap: balance; }
+  h1 { font-size: clamp(2.6rem, 5vw, 3.75rem); }
+  h2 { font-size: 1.5rem; font-weight: 600; }
+  .lede { color: var(--muted); margin-top: 0.6rem; max-width: 34rem; }
+  .status { font-family: var(--ui); font-size: 0.85rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+
+  .notice { font-family: var(--ui); font-size: 0.9rem; font-weight: 500; padding: 0.8rem 1rem; border: 1px solid var(--alert); color: var(--alert); border-radius: 4px; }
+  .notice a { font-weight: 600; }
+
+  .rail { list-style: none; border-bottom: 1px solid var(--line); }
+  .slot { border-top: 1px solid var(--line); animation: rise 0.55s cubic-bezier(0.2, 0.7, 0.2, 1) backwards; animation-delay: calc(var(--i) * 55ms + 100ms); }
+  .slot.hour { border-top: 2px solid var(--ink); }
+  @keyframes rise { from { opacity: 0; transform: translateY(10px); } }
+
+  .slot-btn {
+    width: 100%;
+    display: grid;
+    grid-template-columns: minmax(7.2rem, 9.5rem) minmax(0, 1fr) auto;
+    align-items: baseline;
+    gap: 0.75rem;
+    padding: 0.85rem 0.9rem;
+    border: 0;
+    background: transparent;
+    color: var(--ink);
+    font: inherit;
+    text-align: left;
+    cursor: pointer;
+    transition: background 0.18s, color 0.18s, padding 0.18s;
+  }
+  .slot-btn .t { font-family: var(--display); font-weight: 700; font-size: 2.4rem; line-height: 1; font-variant-numeric: tabular-nums lining-nums; }
+  .slot-btn .t small { font-size: 1rem; font-weight: 600; margin-left: 0.25rem; letter-spacing: 0.04em; }
+  .slot-btn .until { font-size: 0.95rem; color: var(--muted); transition: color 0.18s; }
+  .slot-btn .state { font-family: var(--ui); font-size: 0.74rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); transition: color 0.18s; }
+
+  .slot-btn:hover, .slot.selected .slot-btn { background: var(--accent); color: var(--accent-ink); padding-left: 1.3rem; }
+  .slot-btn:hover .until, .slot-btn:hover .state,
+  .slot.selected .slot-btn .until, .slot.selected .slot-btn .state { color: var(--accent-ink); }
+
+
+  /* Inline booking form */
+  .booking { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.9rem; padding: 1.2rem 1.3rem 1.3rem; background: var(--surface); border-inline: 1px solid var(--line); }
+  .field { display: flex; flex-direction: column; gap: 0.3rem; min-width: 0; }
+  .field label { font-family: var(--ui); font-size: 0.72rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+  .field input { width: 100%; padding: 0.65rem 0.75rem; font: inherit; font-size: 1rem; color: var(--ink); background: var(--ground); border: 1px solid var(--line); border-radius: 3px; }
+  .field input:focus { border-color: var(--accent); }
+  .actions { grid-column: 1 / -1; display: flex; flex-wrap: wrap; align-items: center; gap: 0.9rem; }
+  .form-error { grid-column: 1 / -1; font-family: var(--ui); font-size: 0.88rem; font-weight: 500; color: var(--alert); }
+
+  .btn { display: inline-flex; align-items: center; justify-content: center; padding: 0.72rem 1.3rem; font-family: var(--ui); font-size: 0.9rem; font-weight: 600; text-decoration: none; border-radius: 3px; border: 1px solid var(--red); background: var(--red); color: #ffffff; cursor: pointer; transition: filter 0.15s, transform 0.15s; }
+  .btn:hover { filter: brightness(1.12); transform: translateY(-1px); }
+  .btn:disabled { opacity: 0.6; cursor: wait; transform: none; }
+  .btn.quiet { background: transparent; border-color: var(--line); color: var(--ink); }
+  .link-btn { border: 0; background: none; font-family: var(--ui); font-size: 0.86rem; font-weight: 500; color: var(--muted); text-decoration: underline; text-underline-offset: 3px; cursor: pointer; }
+
+  .prepare { display: flex; flex-direction: column; gap: 0.7rem; }
+  .prepare ul { list-style: none; display: flex; flex-direction: column; gap: 0.55rem; color: var(--muted); }
+  .prepare li { padding-left: 1.1rem; position: relative; }
+  .prepare li::before { content: ""; position: absolute; left: 0; top: 0.68em; width: 0.45rem; height: 2px; background: var(--red); }
+  .prepare strong { color: var(--ink); font-weight: 600; }
+  .contact { font-size: 0.95rem; color: var(--muted); }
+
+  /* Confirmation */
+  .confirmed { display: flex; flex-direction: column; gap: 1.6rem; animation: rise 0.5s cubic-bezier(0.2, 0.7, 0.2, 1) backwards; }
+  .confirmed .kicker { font-family: var(--ui); font-size: 0.8rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); }
+  .confirmed .when { font-family: var(--display); font-weight: 700; font-size: clamp(3.4rem, 8vw, 5.5rem); line-height: 0.95; font-variant-numeric: lining-nums; }
+  .confirmed .sub { font-family: var(--display); font-weight: 500; font-size: 1.6rem; color: var(--muted); line-height: 1.1; margin-top: 0.4rem; }
+  .zoom { padding: 1rem 1.2rem; background: var(--surface); border: 1px solid var(--line); border-radius: 4px; display: flex; flex-direction: column; gap: 0.2rem; }
+  .zoom b { font-family: var(--ui); font-size: 0.72rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
+  .zoom a { color: var(--accent); font-weight: 600; overflow-wrap: anywhere; }
+  .row { display: flex; flex-wrap: wrap; gap: 0.7rem; }
+
+  /* Pin the leaf only when the window can show all of it, so it never needs its own scrollbar. */
+  @media (min-width: 900px) and (min-height: 780px) {
+    .leaf { position: sticky; top: 0; height: 100vh; }
+  }
+  @media (max-width: 899px) {
+    .page { grid-template-columns: minmax(0, 1fr); }
+    .leaf { gap: 2rem; padding: 2rem 1.25rem; }
+    .date .num { font-size: 8.5rem; }
+    .date .words { font-size: 2.2rem; }
+  }
+  @media (max-width: 480px) {
+    .slot-btn { grid-template-columns: auto minmax(0, 1fr) auto; padding-inline: 0.5rem; }
+    .slot-btn .t { font-size: 2rem; }
+    .slot-btn .until { font-size: 0.82rem; }
+    .booking { grid-template-columns: minmax(0, 1fr); padding: 1rem; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation: none !important; transition: none !important; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+  <aside class="leaf">
+    <div class="brand">
+      <strong>The Wharton School</strong>
+      <span>University of Pennsylvania</span>
+    </div>
+
+    <div class="date">
+      <div class="eyebrow">Interviews</div>
+      <div class="num" aria-hidden="true">4</div>
+      <div class="words"><span class="day">Wednesday</span><span>November</span></div>
+    </div>
+
+    <ul class="facts">
+      <li><b>Time</b><span>Morning, Eastern Standard Time</span></li>
+      <li><b>Length</b><span>30 minutes</span></li>
+      <li><b>Where</b><span>On Zoom</span></li>
+      <li><b>With</b><span>Gideon, Sasha, and Sergio</span></li>
+    </ul>
+  </aside>
+
+  <main class="content">
+    <div class="inner" id="choose">
+      <header>
+        <h1>Choose your interview time</h1>
+        <p class="lede">Select any time below and confirm. Once you confirm, that time is yours. All times are Eastern Standard Time.</p>
+      </header>
+
+      <div class="notice" id="notice" role="alert" hidden></div>
+
+      <p class="status" id="status" aria-live="polite">Checking available times</p>
+
+      <ol class="rail" id="rail"></ol>
+
+      <section class="prepare">
+        <h2>Before your interview</h2>
+        <ul>
+          <li><strong>Coding sample.</strong> Please send one at least one day before your interview. R or Stata is best; Python, MATLAB, or Julia is fine too. You are welcome to send two if that shows different skills.</li>
+          <li><strong>Writing sample.</strong> If you have not sent one yet, please send it as soon as possible, preferably a research paper.</li>
+        </ul>
+      </section>
+    </div>
+
+    <div class="inner" id="done" hidden>
+      <div class="confirmed">
+        <div>
+          <p class="kicker">You are booked<span id="done-name"></span></p>
+          <p class="when" id="done-when"></p>
+          <p class="sub">Wednesday, November 4, Eastern Standard Time</p>
+        </div>
+
+        <div class="zoom">
+          <b>Join on Zoom</b>
+          <a id="zoom-link" target="_blank" rel="noopener"></a>
+        </div>
+
+        <div class="row">
+          <a class="btn" id="gcal" target="_blank" rel="noopener">Add to Google Calendar</a>
+          <button class="btn quiet" id="ics" type="button">Download calendar file</button>
+        </div>
+
+        <section class="prepare">
+          <h2>Before your interview</h2>
+          <ul>
+            <li><strong>Coding sample.</strong> Please send one at least one day before your interview. R or Stata is best; Python, MATLAB, or Julia is fine too.</li>
+            <li><strong>Writing sample.</strong> If you have not sent one yet, please send it as soon as possible, preferably a research paper.</li>
+          </ul>
+        </section>
+
+        <p class="contact">Need to change your time? Email <span id="contact-email"></span>.</p>
+      </div>
+    </div>
+  </main>
+</div>
+
+<noscript><p style="padding:1rem">This sign-up needs JavaScript. Please email gideonbo@wharton.upenn.edu to choose a time.</p></noscript>
+
+<script>
+(function () {
+  // Paste the Google Apps Script web app URL here. Empty means preview mode: nothing is saved.
+  var API_URL = '';
+  // Shown only in preview mode. Once connected, the server decides which times appear.
+  var PREVIEW_TIMES = ['9:00 AM', '9:30 AM', '10:00 AM', '10:30 AM', '11:00 AM', '11:30 AM'];
+
+  var ZOOM_URL = 'https://upenn.zoom.us/my/profsashaindarte';
+  var CONTACT = 'gideonbo@wharton.upenn.edu';
+  var STORE_KEY = 'interview-nov4-booking';
+  var REFRESH_MS = 30000;
+
+  var state = { loaded: false, open: [], selected: null, sending: false, draftName: '', draftEmail: '' };
+
+  var rail = document.getElementById('rail');
+  var status = document.getElementById('status');
+  var notice = document.getElementById('notice');
+  var timer = null;
+
+  function pad(n) { return (n < 10 ? '0' : '') + n; }
+
+  function parseTime(label) {
+    var m = /^(\d{1,2}):(\d{2}) (AM|PM)$/.exec(label || '');
+    if (!m) return null;
+    var h = (+m[1] % 12) + (m[3] === 'PM' ? 12 : 0);
+    return { label: label, h: h, m: +m[2] };
+  }
+
+  function endLabel(s) {
+    var mins = s.h * 60 + s.m + 30;
+    var h = Math.floor(mins / 60), m = mins % 60;
+    return (h > 12 ? h - 12 : h) + ':' + pad(m) + (h >= 12 ? ' PM' : ' AM');
+  }
+
+  // November 4, 2026 is after daylight saving ends, so EST is UTC-5.
+  function utcStamp(h, m) { return '20261104T' + pad(h + 5) + pad(m) + '00Z'; }
+
+  function el(tag, cls, text) {
+    var e = document.createElement(tag);
+    if (cls) e.className = cls;
+    if (text != null) e.textContent = text;
+    return e;
+  }
+
+  function showNotice(message) {
+    notice.textContent = message || '';
+    notice.hidden = !message;
+  }
+
+  function buildField(id, labelText, type, auto, max, draftKey) {
+    var field = el('div', 'field');
+    var label = el('label', null, labelText);
+    label.htmlFor = id;
+    var input = el('input');
+    input.id = id; input.type = type; input.autocomplete = auto; input.maxLength = max; input.required = true;
+    input.value = state[draftKey];
+    input.addEventListener('input', function () { state[draftKey] = input.value; });
+    field.appendChild(label); field.appendChild(input);
+    return field;
+  }
+
+  function buildForm(slot) {
+    var form = el('form', 'booking');
+    form.id = 'booking-form';
+    form.noValidate = true;
+    form.appendChild(buildField('cand-name', 'Your name', 'text', 'name', 120, 'draftName'));
+    form.appendChild(buildField('cand-email', 'Your email', 'email', 'email', 200, 'draftEmail'));
+
+    var error = el('p', 'form-error');
+    error.id = 'form-error'; error.hidden = true; error.setAttribute('role', 'alert');
+    form.appendChild(error);
+
+    var actions = el('div', 'actions');
+    var submit = el('button', 'btn', 'Confirm ' + slot.label);
+    submit.type = 'submit'; submit.id = 'confirm-btn';
+    var cancel = el('button', 'link-btn', 'Choose another time');
+    cancel.type = 'button';
+    cancel.addEventListener('click', function () { state.selected = null; render(); });
+    actions.appendChild(submit); actions.appendChild(cancel);
+    form.appendChild(actions);
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      book(slot, state.draftName.trim(), state.draftEmail.trim(), error, submit);
+    });
+    return form;
+  }
+
+  function render() {
+    var previousFocus = document.activeElement && document.activeElement.id;
+    rail.textContent = '';
+
+    state.open.map(parseTime).filter(Boolean).forEach(function (s, i) {
+      var isSelected = state.selected === s.label;
+      var li = el('li', 'slot');
+      li.style.setProperty('--i', i);
+      if (s.m === 0) li.classList.add('hour');
+      if (isSelected) li.classList.add('selected');
+
+      var btn = el('button', 'slot-btn');
+      btn.type = 'button';
+      btn.id = 'slot-' + s.h + '-' + pad(s.m);
+      btn.setAttribute('aria-expanded', isSelected ? 'true' : 'false');
+
+      var parts = s.label.split(' ');
+      var t = el('span', 't', parts[0]);
+      t.appendChild(el('small', null, parts[1]));
+      btn.appendChild(t);
+      btn.appendChild(el('span', 'until', 'until ' + endLabel(s)));
+      btn.appendChild(el('span', 'state', isSelected ? 'Selected' : 'Select →'));
+
+      btn.addEventListener('click', function () {
+        state.selected = isSelected ? null : s.label;
+        showNotice('');
+        render();
+        var first = document.getElementById('cand-name');
+        if (first && state.selected) first.focus();
+      });
+
+      li.appendChild(btn);
+      if (isSelected) li.appendChild(buildForm(s));
+      rail.appendChild(li);
+    });
+
+    rail.hidden = state.open.length === 0;
+    status.hidden = state.loaded;
+    if (state.loaded && state.open.length === 0) {
+      showNotice('No interview times are available right now. Please email ' + CONTACT + '.');
+    }
+
+    if (previousFocus) {
+      var again = document.getElementById(previousFocus);
+      if (again) again.focus();
+    }
+  }
+
+  // The entrance plays once; later redraws (selecting a time, refreshes) should not replay it.
+  function settleAnimation() {
+    var style = document.createElement('style');
+    style.textContent = '.slot { animation: none; }';
+    document.head.appendChild(style);
+  }
+
+  function setOpen(list) {
+    state.open = list.slice();
+    state.loaded = true;
+    if (state.selected && list.indexOf(state.selected) < 0 && !state.sending) {
+      showNotice(state.selected + ' is no longer available. Please choose another time.');
+      state.selected = null;
+    }
+  }
+
+  function refresh() {
+    if (!API_URL) {
+      setOpen(PREVIEW_TIMES);
+      showNotice('Preview: this page is not connected yet, so bookings are not being saved.');
+      render();
+      return;
+    }
+    fetch(API_URL, { method: 'GET', cache: 'no-store' })
+      .then(function (r) { return r.json(); })
+      .then(function (data) {
+        if (!data.ok) throw new Error('bad response');
+        var changed = !state.loaded || JSON.stringify(state.open) !== JSON.stringify(data.open);
+        var form = document.getElementById('booking-form');
+        var typing = form && form.contains(document.activeElement);
+        var lostSelection = state.selected && data.open.indexOf(state.selected) < 0;
+        setOpen(data.open);
+        // Don't redraw under someone mid-typing unless the time they chose just went away.
+        if (changed && (!typing || lostSelection)) render();
+      })
+      .catch(function () {
+        if (!state.loaded) {
+          status.hidden = true;
+          showNotice('We could not check available times. Please refresh this page, or email ' + CONTACT + ' to choose a time.');
+        }
+      });
+  }
+
+  function fail(errorEl, submit, label, message) {
+    errorEl.textContent = message;
+    errorEl.hidden = false;
+    submit.disabled = false;
+    submit.textContent = 'Confirm ' + label;
+  }
+
+  function book(slot, name, email, errorEl, submit) {
+    if (!name) return fail(errorEl, submit, slot.label, 'Please enter your name.');
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return fail(errorEl, submit, slot.label, 'Please enter a valid email address.');
+    if (!API_URL) return fail(errorEl, submit, slot.label, 'Preview: this page is not connected yet, so nothing was saved.');
+
+    errorEl.hidden = true;
+    submit.disabled = true;
+    submit.textContent = 'Booking…';
+    state.sending = true;
+
+    fetch(API_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+      body: JSON.stringify({ slot: slot.label, name: name, email: email })
+    })
+      .then(function (r) { return r.json(); })
+      .then(function (data) {
+        state.sending = false;
+        if (data.ok) {
+          var booking = { slot: data.slot, name: name };
+          try { localStorage.setItem(STORE_KEY, JSON.stringify(booking)); } catch (e) {}
+          showDone(booking);
+          return;
+        }
+        if (data.code === 'taken') {
+          state.open = state.open.filter(function (l) { return l !== slot.label; });
+          state.selected = null;
+          render();
+          showNotice(data.message);
+          notice.scrollIntoView({ block: 'center' });
+          refresh();
+          return;
+        }
+        if (data.code === 'duplicate') {
+          return fail(errorEl, submit, slot.label, data.message + ' To change it, email ' + CONTACT + '.');
+        }
+        fail(errorEl, submit, slot.label, data.message || 'That did not go through. Please try again.');
+      })
+      .catch(function () {
+        state.sending = false;
+        fail(errorEl, submit, slot.label, 'We could not reach the sign-up. Check your connection and try again, or email ' + CONTACT + '.');
+      });
+  }
+
+  function showDone(booking) {
+    var s = parseTime(booking.slot);
+    if (!s) return;
+    if (timer) clearInterval(timer);
+    document.getElementById('choose').hidden = true;
+    document.getElementById('done').hidden = false;
+
+    var first = (booking.name || '').split(/\s+/)[0];
+    document.getElementById('done-name').textContent = first ? ', ' + first : '';
+    document.getElementById('done-when').textContent = booking.slot;
+
+    var zoom = document.getElementById('zoom-link');
+    zoom.href = ZOOM_URL;
+    zoom.textContent = ZOOM_URL.replace('https://', '');
+    document.getElementById('contact-email').textContent = CONTACT;
+
+    var end = s.h * 60 + s.m + 30;
+    var startStamp = utcStamp(s.h, s.m);
+    var stopStamp = utcStamp(Math.floor(end / 60), end % 60);
+    var title = 'Interview with Gideon, Sasha, and Sergio';
+    document.getElementById('gcal').href = 'https://calendar.google.com/calendar/render?action=TEMPLATE'
+      + '&text=' + encodeURIComponent(title)
+      + '&dates=' + startStamp + '/' + stopStamp
+      + '&details=' + encodeURIComponent('Zoom: ' + ZOOM_URL)
+      + '&location=' + encodeURIComponent(ZOOM_URL);
+
+    document.getElementById('ics').onclick = function () {
+      var ics = [
+        'BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//Interview Sign-Up//EN', 'BEGIN:VEVENT',
+        'UID:interview-' + startStamp + '@gideon-bornstein.com',
+        'DTSTAMP:' + new Date().toISOString().replace(/[-:]|\.\d{3}/g, ''),
+        'DTSTART:' + startStamp, 'DTEND:' + stopStamp,
+        'SUMMARY:' + title.replace(/,/g, '\\,'),
+        'LOCATION:' + ZOOM_URL,
+        'DESCRIPTION:Zoom: ' + ZOOM_URL,
+        'END:VEVENT', 'END:VCALENDAR'
+      ].join('\r\n');
+      var url = URL.createObjectURL(new Blob([ics], { type: 'text/calendar' }));
+      var a = document.createElement('a');
+      a.href = url; a.download = 'wharton-interview.ics';
+      document.body.appendChild(a); a.click(); a.remove();
+      setTimeout(function () { URL.revokeObjectURL(url); }, 1000);
+    };
+    window.scrollTo({ top: 0 });
+  }
+
+  function start() {
+    render();
+    setTimeout(settleAnimation, 1100);
+    refresh();
+    timer = setInterval(refresh, REFRESH_MS);
+    window.addEventListener('focus', refresh);
+  }
+
+  var saved = null;
+  try { saved = JSON.parse(localStorage.getItem(STORE_KEY)); } catch (e) {}
+
+  if (saved && parseTime(saved.slot)) {
+    showDone(saved);
+    // If the organizers reopened this time in the sheet, return to the list.
+    if (API_URL) {
+      fetch(API_URL, { method: 'GET', cache: 'no-store' })
+        .then(function (r) { return r.json(); })
+        .then(function (data) {
+          if (data.ok && data.open.indexOf(saved.slot) >= 0) {
+            try { localStorage.removeItem(STORE_KEY); } catch (e) {}
+            document.getElementById('done').hidden = true;
+            document.getElementById('choose').hidden = false;
+            start();
+          }
+        })
+        .catch(function () {});
+    }
+  } else {
+    start();
+  }
+})();
+</script>
+</body>
+</html>
