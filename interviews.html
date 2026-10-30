@@ -81,6 +81,10 @@
 
   .facts { list-style: none; border-top: 1px solid var(--hero-line); }
   .facts li { display: grid; grid-template-columns: 5.2rem minmax(0, 1fr); gap: 1rem; padding: 0.7rem 0; border-bottom: 1px solid var(--hero-line); font-size: 1rem; line-height: 1.4; }
+  .facts a { text-decoration: underline; text-underline-offset: 3px; overflow-wrap: anywhere; }
+  .facts a:hover { color: var(--hero-soft); }
+  .facts a:focus-visible { outline-color: var(--hero-ink); }
+  .facts span { min-width: 0; }
   .facts b { font-family: var(--ui); font-size: 0.72rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--hero-soft); padding-top: 0.2rem; }
 
   /* The schedule */
@@ -196,8 +200,8 @@
     <ul class="facts">
       <li><b>Time</b><span>Morning, Eastern Standard Time</span></li>
       <li><b>Length</b><span>30 minutes</span></li>
-      <li><b>Where</b><span>On Zoom</span></li>
-      <li><b>With</b><span>Gideon, Sasha, and Sergio</span></li>
+      <li><b>Zoom</b><span><a href="https://upenn.zoom.us/my/profsashaindarte" target="_blank" rel="noopener">upenn.zoom.us/my/profsashaindarte</a></span></li>
+      <li><b>With</b><span>Gideon Bornstein, Sasha Indarte, and Sergio Salgado</span></li>
     </ul>
   </aside>
 
@@ -497,7 +501,7 @@
     var end = s.h * 60 + s.m + 30;
     var startStamp = utcStamp(s.h, s.m);
     var stopStamp = utcStamp(Math.floor(end / 60), end % 60);
-    var title = 'Interview with Gideon, Sasha, and Sergio';
+    var title = 'Interview with Gideon Bornstein, Sasha Indarte, and Sergio Salgado';
     document.getElementById('gcal').href = 'https://calendar.google.com/calendar/render?action=TEMPLATE'
       + '&text=' + encodeURIComponent(title)
       + '&dates=' + startStamp + '/' + stopStamp
