@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="robots" content="noindex, nofollow">
-<title>Interview Sign-Up, November 4</title>
+<title>Interview Sign-Up, November 6</title>
 <link rel="icon" href="favicon.ico" type="image/x-icon">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -201,12 +201,12 @@
 
     <div class="date">
       <div class="eyebrow">Interviews</div>
-      <div class="num" aria-hidden="true">4</div>
-      <div class="words"><span class="day">Wednesday</span><span>November</span></div>
+      <div class="num" aria-hidden="true">6</div>
+      <div class="words"><span class="day">Friday</span><span>November</span></div>
     </div>
 
     <ul class="facts">
-      <li><b>Time</b><span>Morning, Eastern Standard Time</span></li>
+      <li><b>Time</b><span>Afternoon, Eastern Standard Time</span></li>
       <li><b>Length</b><span>30 minutes</span></li>
       <li><b>Zoom</b><span><a href="https://upenn.zoom.us/my/profsashaindarte" target="_blank" rel="noopener">upenn.zoom.us/my/profsashaindarte</a></span></li>
       <li><b>With</b><span>Gideon Bornstein, Sasha Indarte, and Sergio Salgado</span></li>
@@ -267,7 +267,7 @@
         <div>
           <p class="kicker">You are booked<span id="done-name"></span></p>
           <p class="when" id="done-when"></p>
-          <p class="sub">Wednesday, November 4, Eastern Standard Time</p>
+          <p class="sub">Friday, November 6, Eastern Standard Time</p>
         </div>
 
         <div class="zoom">
@@ -303,7 +303,7 @@
 
   var ZOOM_URL = 'https://upenn.zoom.us/my/profsashaindarte';
   var CONTACT = 'gideonbo@wharton.upenn.edu';
-  var STORE_KEY = 'interview-nov4-booking';
+  var STORE_KEY = 'interview-nov6-booking';
   var REFRESH_MS = 30000;
 
   var state = { loaded: false, open: [], selected: null, sending: false, draftName: '', draftEmail: '' };
@@ -328,8 +328,8 @@
     return (h > 12 ? h - 12 : h) + ':' + pad(m) + (h >= 12 ? ' PM' : ' AM');
   }
 
-  // November 4, 2026 is after daylight saving ends, so EST is UTC-5.
-  function utcStamp(h, m) { return '20261104T' + pad(h + 5) + pad(m) + '00Z'; }
+  // November 6, 2026 is after daylight saving ends, so EST is UTC-5.
+  function utcStamp(h, m) { return '20261106T' + pad(h + 5) + pad(m) + '00Z'; }
 
   function el(tag, cls, text) {
     var e = document.createElement(tag);
