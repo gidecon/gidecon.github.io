@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="robots" content="noindex, nofollow">
-<title>Interview Sign-Up, November 6</title>
+<title>TA Interview Sign-Up, November 20</title>
 <link rel="icon" href="favicon.ico" type="image/x-icon">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -200,16 +200,16 @@
     </div>
 
     <div class="date">
-      <div class="eyebrow">Interviews</div>
-      <div class="num" aria-hidden="true">6</div>
+      <div class="eyebrow">FNCE 1010 TA interviews</div>
+      <div class="num" aria-hidden="true">20</div>
       <div class="words"><span class="day">Friday</span><span>November</span></div>
     </div>
 
     <ul class="facts">
-      <li><b>Time</b><span>Afternoon, Eastern Standard Time</span></li>
-      <li><b>Length</b><span>30 minutes</span></li>
-      <li><b>Zoom</b><span><a href="https://upenn.zoom.us/my/profsashaindarte" target="_blank" rel="noopener">upenn.zoom.us/my/profsashaindarte</a></span></li>
-      <li><b>With</b><span>Gideon Bornstein, Sasha Indarte, and Sergio Salgado</span></li>
+      <li><b>Time</b><span>Morning, Eastern Standard Time</span></li>
+      <li><b>Length</b><span>15 minutes</span></li>
+      <li><b>Zoom</b><span><a href="https://upenn.zoom.us/my/gbornstein" target="_blank" rel="noopener">upenn.zoom.us/my/gbornstein</a></span></li>
+      <li><b>With</b><span>Professors Bornstein and Myers</span></li>
     </ul>
   </aside>
 
@@ -226,13 +226,6 @@
 
       <ol class="rail" id="rail"></ol>
 
-      <section class="prepare">
-        <h2>Before your interview</h2>
-        <ul>
-          <li><strong>Coding sample.</strong> Please send one at least one day before your interview. R or Stata is best; Python, MATLAB, or Julia is fine too. You are welcome to send two if that shows different skills.</li>
-          <li><strong>Writing sample.</strong> If you have not sent one yet, please send it as soon as possible, preferably a research paper.</li>
-        </ul>
-      </section>
 
       <section class="decline">
         <p class="contact">Unable to interview? <button class="link-btn" id="decline-open" type="button" aria-expanded="false">Decline this invitation</button></p>
@@ -267,7 +260,7 @@
         <div>
           <p class="kicker">You are booked<span id="done-name"></span></p>
           <p class="when" id="done-when"></p>
-          <p class="sub">Friday, November 6, Eastern Standard Time</p>
+          <p class="sub">Friday, November 20, Eastern Standard Time</p>
         </div>
 
         <div class="zoom">
@@ -280,13 +273,6 @@
           <button class="btn quiet" id="ics" type="button">Download calendar file</button>
         </div>
 
-        <section class="prepare">
-          <h2>Before your interview</h2>
-          <ul>
-            <li><strong>Coding sample.</strong> Please send one at least one day before your interview. R or Stata is best; Python, MATLAB, or Julia is fine too.</li>
-            <li><strong>Writing sample.</strong> If you have not sent one yet, please send it as soon as possible, preferably a research paper.</li>
-          </ul>
-        </section>
 
         <p class="contact">Need to change your time? Email <span id="contact-email"></span>.</p>
       </div>
@@ -301,9 +287,10 @@
   // Google Apps Script web app. It returns only the times still available.
   var API_URL = 'https://script.google.com/macros/s/AKfycbwDDC3RgYgXoFXKWkJJLzG0BPsEXLBOYVpUhuspS50E3228XztPSR-FfZvLSk59vcY-/exec';
 
-  var ZOOM_URL = 'https://upenn.zoom.us/my/profsashaindarte';
+  var ZOOM_URL = 'https://upenn.zoom.us/my/gbornstein';
   var CONTACT = 'gideonbo@wharton.upenn.edu';
-  var STORE_KEY = 'interview-nov6-booking';
+  var STORE_KEY = 'interview-nov20-ta-booking';
+  var LENGTH_MIN = 15;
   var REFRESH_MS = 30000;
 
   var state = { loaded: false, open: [], selected: null, sending: false, draftName: '', draftEmail: '' };
@@ -323,13 +310,13 @@
   }
 
   function endLabel(s) {
-    var mins = s.h * 60 + s.m + 30;
+    var mins = s.h * 60 + s.m + LENGTH_MIN;
     var h = Math.floor(mins / 60), m = mins % 60;
     return (h > 12 ? h - 12 : h) + ':' + pad(m) + (h >= 12 ? ' PM' : ' AM');
   }
 
-  // November 6, 2026 is after daylight saving ends, so EST is UTC-5.
-  function utcStamp(h, m) { return '20261106T' + pad(h + 5) + pad(m) + '00Z'; }
+  // November 20, 2026 is after daylight saving ends, so EST is UTC-5.
+  function utcStamp(h, m) { return '20261120T' + pad(h + 5) + pad(m) + '00Z'; }
 
   function el(tag, cls, text) {
     var e = document.createElement(tag);
@@ -533,10 +520,10 @@
     zoom.textContent = ZOOM_URL.replace('https://', '');
     document.getElementById('contact-email').textContent = CONTACT;
 
-    var end = s.h * 60 + s.m + 30;
+    var end = s.h * 60 + s.m + LENGTH_MIN;
     var startStamp = utcStamp(s.h, s.m);
     var stopStamp = utcStamp(Math.floor(end / 60), end % 60);
-    var title = 'Interview with Gideon Bornstein, Sasha Indarte, and Sergio Salgado';
+    var title = 'FNCE 1010 TA interview with Professors Bornstein and Myers';
     document.getElementById('gcal').href = 'https://calendar.google.com/calendar/render?action=TEMPLATE'
       + '&text=' + encodeURIComponent(title)
       + '&dates=' + startStamp + '/' + stopStamp
