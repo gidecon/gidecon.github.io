@@ -226,16 +226,34 @@
 
       <ol class="rail" id="rail"></ol>
 
-
       <section class="decline">
-        <p class="contact">Unable to interview? <button class="link-btn" id="decline-open" type="button" aria-expanded="false">Decline this invitation</button></p>
+        <p class="contact">Unable to interview? <button class="link-btn" id="request-open" type="button" aria-expanded="false" aria-controls="request-form">Suggest another time</button> or <button class="link-btn" id="decline-open" type="button" aria-expanded="false" aria-controls="decline-form">decline this invitation</button>.</p>
+        <form class="booking" id="request-form" novalidate hidden>
+          <div class="field">
+            <label for="request-name">Your name</label>
+            <input id="request-name" type="text" autocomplete="name" maxlength="120" required>
+          </div>
+          <div class="field">
+            <label for="request-email">Your email</label>
+            <input id="request-email" type="email" autocomplete="email" maxlength="200" required>
+          </div>
+          <div class="field wide">
+            <label for="request-when">When would work for you?</label>
+            <textarea id="request-when" rows="3" maxlength="1000" required placeholder="Another time on Friday, November 20, or other days and times that work"></textarea>
+          </div>
+          <p class="form-error" id="request-error" role="alert" hidden></p>
+          <div class="actions">
+            <button class="btn" id="request-submit" type="submit">Send</button>
+            <button class="link-btn" id="request-cancel" type="button">Never mind</button>
+          </div>
+        </form>
         <form class="booking" id="decline-form" novalidate hidden>
           <div class="field wide">
             <label for="decline-name">Your name</label>
             <input id="decline-name" type="text" autocomplete="name" maxlength="120" required>
           </div>
           <div class="field wide">
-            <label for="decline-reason">Reason (optional)</label>
+            <label for="decline-reason">Explanation (optional)</label>
             <textarea id="decline-reason" rows="3" maxlength="1000"></textarea>
           </div>
           <p class="form-error" id="decline-error" role="alert" hidden></p>
@@ -252,6 +270,14 @@
         <p class="kicker">Response received</p>
         <p class="thanks">Thank you for letting us know</p>
         <p class="note">We wish you all the best.</p>
+      </div>
+    </div>
+
+    <div class="inner" id="requested" hidden>
+      <div class="confirmed">
+        <p class="kicker">Request received</p>
+        <p class="thanks">Thank you, we will be in touch</p>
+        <p class="note">We will email you to find a time that works.</p>
       </div>
     </div>
 
@@ -550,20 +576,30 @@
     window.scrollTo({ top: 0 });
   }
 
-  function setDeclineOpen(open) {
-    document.getElementById('decline-form').hidden = !open;
-    document.getElementById('decline-open').setAttribute('aria-expanded', open ? 'true' : 'false');
-    if (open) document.getElementById('decline-name').focus();
+  // "Unable to interview?" offers two forms; only one is open at a time.
+  var RESPONSE_FORMS = ['request', 'decline'];
+
+  function value(id) { return document.getElementById(id).value.trim(); }
+
+  function setResponseForm(which) {
+    RESPONSE_FORMS.forEach(function (k) {
+      document.getElementById(k + '-form').hidden = k !== which;
+      document.getElementById(k + '-open').setAttribute('aria-expanded', k === which ? 'true' : 'false');
+    });
+    if (which) document.getElementById(which + '-name').focus();
   }
 
-  function decline(name, reason, errorEl, submit) {
-    function failDecline(message) {
+  function sendResponse(kind, payload, problem, doneId) {
+    var errorEl = document.getElementById(kind + '-error');
+    var submit = document.getElementById(kind + '-submit');
+    var label = submit.textContent;
+    function failSend(message) {
       errorEl.textContent = message;
       errorEl.hidden = false;
       submit.disabled = false;
-      submit.textContent = 'Decline invitation';
+      submit.textContent = label;
     }
-    if (!name) return failDecline('Please enter your name.');
+    if (problem) return failSend(problem);
 
     errorEl.hidden = true;
     submit.disabled = true;
@@ -572,33 +608,41 @@
     fetch(API_URL, {
       method: 'POST',
       headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-      body: JSON.stringify({ action: 'decline', name: name, reason: reason })
+      body: JSON.stringify(payload)
     })
       .then(function (r) { return r.json(); })
       .then(function (data) {
-        if (!data.ok) return failDecline(data.message || 'That did not go through. Please try again.');
+        if (!data.ok) return failSend(data.message || 'That did not go through. Please try again.');
         if (timer) clearInterval(timer);
         document.getElementById('choose').hidden = true;
-        document.getElementById('declined').hidden = false;
+        document.getElementById(doneId).hidden = false;
         window.scrollTo({ top: 0 });
       })
       .catch(function () {
-        failDecline('We could not send your response. Check your connection and try again, or email ' + CONTACT + '.');
+        failSend('We could not send your response. Check your connection and try again, or email ' + CONTACT + '.');
       });
   }
 
-  document.getElementById('decline-open').addEventListener('click', function () {
-    setDeclineOpen(document.getElementById('decline-form').hidden);
+  RESPONSE_FORMS.forEach(function (k) {
+    document.getElementById(k + '-open').addEventListener('click', function () {
+      setResponseForm(document.getElementById(k + '-form').hidden ? k : null);
+    });
+    document.getElementById(k + '-cancel').addEventListener('click', function () { setResponseForm(null); });
   });
-  document.getElementById('decline-cancel').addEventListener('click', function () { setDeclineOpen(false); });
+
+  document.getElementById('request-form').addEventListener('submit', function (e) {
+    e.preventDefault();
+    var name = value('request-name'), email = value('request-email'), when = value('request-when');
+    var problem = !name ? 'Please enter your name.'
+      : !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) ? 'Please enter a valid email address.'
+      : !when ? 'Please tell us when would work for you.' : '';
+    sendResponse('request', { action: 'request', name: name, email: email, when: when }, problem, 'requested');
+  });
+
   document.getElementById('decline-form').addEventListener('submit', function (e) {
     e.preventDefault();
-    decline(
-      document.getElementById('decline-name').value.trim(),
-      document.getElementById('decline-reason').value.trim(),
-      document.getElementById('decline-error'),
-      document.getElementById('decline-submit')
-    );
+    var name = value('decline-name');
+    sendResponse('decline', { action: 'decline', name: name, reason: value('decline-reason') }, name ? '' : 'Please enter your name.', 'declined');
   });
 
   function start() {
